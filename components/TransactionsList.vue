@@ -9,8 +9,11 @@
       <td
         class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal dark:text-sky-400"
       >
-        <span class="border border-none rounded-md p-2 bg-blue-100">
-          {{ transaction.category }}
+        <span
+          class="border border-none rounded-md p-2"
+          :style="{ 'background-color': transaction.category.color }"
+        >
+          {{ transaction.category.name }}
         </span>
       </td>
       <td
@@ -29,13 +32,21 @@
 </template>
 
 <script>
+import { inject } from "vue";
 export default {
   name: "TransactionsList",
-  props: {
-    transactions: {
-      type: Array,
-      required: true,
-    },
+  // props: {
+  //   transactions: {
+  //     type: Array,
+  //     required: true,
+  //   },
+  // },
+  setup() {
+    const transactions = inject("transactions");
+
+    return {
+      transactions,
+    };
   },
 };
 </script>
