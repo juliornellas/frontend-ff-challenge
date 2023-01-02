@@ -28,6 +28,7 @@ export default {
   },
   setup() {
     //Data
+    //Dummy data
     const transactions = [
       {
         id: "njiuhbn",
@@ -115,8 +116,6 @@ export default {
       "Account Five",
     ];
     const banks = ["Activo Bank", "Revolut", "Wise", "Millenium"];
-    const startingMonth = "";
-    const endingMonth = "";
 
     //Provide
     provide("transactions", transactions);
@@ -126,37 +125,7 @@ export default {
       transactions,
       accounts,
       banks,
-      startingMonth,
-      endingMonth,
     };
   },
-  // methods: {
-  //   selectedAccount(event) {
-  //     this.account = event;
-  //     console.log("The selected value for Account is", this.account);
-  //   },
-  //   selectedBank(event) {
-  //     this.bank = event;
-  //     console.log("The selected value for Bank is", this.bank);
-  //   },
-  //   inputSearch(event) {
-  //     console.log("Searching for:", event);
-  //   },
-  //   selectedStartingMonth(event) {
-  //     this.startingMonth = event;
-  //     console.log("The selected starting month is:", event);
-  //   },
-  //   selectedEndingMonth(event) {
-  //     //Compare dates
-  //     this.endingMonth = event;
-  //     console.log("The selected ending month is:", event);
-  //   },
-  // },
 };
 </script>
-
-<style>
-body {
-  background-color: rgb(245 245 244); /* bg-stone-100 */
-}
-</style>
