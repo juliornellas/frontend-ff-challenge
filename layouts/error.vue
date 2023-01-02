@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="flex items-center justify-center mt-32">
+  <div class="py-32">
+    <div class="flex items-center justify-center">
       <h1 class="uppercase">Oops, something went wrong !</h1>
     </div>
     <div class="flex items-center justify-center mt-8">

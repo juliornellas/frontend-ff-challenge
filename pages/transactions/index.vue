@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-16 mt-4 bg-white pt-6 px-2 mb-4">
+  <div>
     <!-- Header filters -->
     <div class="mb-4">
       <p class="text-lg font-semibold">Transactions</p>
