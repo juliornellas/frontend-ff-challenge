@@ -53,6 +53,7 @@ export default {
     TheSelectOption,
     TheMonthDate,
   },
+
   props: {
     banks: {
       type: Array,

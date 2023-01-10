@@ -6,11 +6,11 @@
     </div>
 
     <!-- Filters -->
-    <TheFiltersTransactions :banks="banks" :accounts="accounts" />
+    <TheFiltersTransactions :banks="banksArray" :accounts="accountsArray" />
 
     <!-- Transactions -->
     <div class="mt-4 overflow-y-auto">
-      <TheTransactionTable />
+      <TheTransactionTable :transactions="transactions" />
     </div>
   </div>
 </template>
@@ -19,6 +19,28 @@
 import { provide } from "vue";
 import TheTransactionTable from "@/components/TheTransactionTable.vue";
 import TheFiltersTransactions from "@/components/TheFiltersTransactions.vue";
+import gql from "graphql-tag";
+
+const ALL_ACCOUNTS = gql`
+  query getAccounts {
+    accounts {
+      id
+      name
+      bank
+    }
+  }
+`;
+
+const TRANSACTIONS = gql`
+  query getTransactions {
+    transactions {
+      reference
+      amount
+      currency
+      date
+    }
+  }
+`;
 
 export default {
   name: "IndexPage",
@@ -26,105 +48,54 @@ export default {
     TheTransactionTable,
     TheFiltersTransactions,
   },
-  setup() {
-    //Data
-    //Dummy data
-    const transactions = [
-      {
-        id: "njiuhbn",
-        reference: "No reference provided",
-        category: {
-          name: "Advertising",
-          color: "#7048a3",
-        },
-        date: "17/04/2022",
-        amount: "3.0",
-        currency: "EUR",
-      },
-      {
-        id: "fghj",
-        reference: "Coffee",
-        category: {
-          name: "Contractors",
-          color: "#f6f2ab",
-        },
-        date: "17/04/2022",
-        amount: "1,923.0",
-        currency: "GPB",
-      },
-      {
-        id: "dvdf",
-        reference: "Anything",
-        category: {
-          name: "Company Investments",
-          color: "#958e80",
-        },
-        date: "19/04/2022",
-        amount: "7,123.0",
-        currency: "EUR",
-      },
-      {
-        id: "ijn",
-        reference: "No reference provided",
-        category: {
-          name: "Payroll and Consultants",
-          color: "#f6f2ab",
-        },
-        date: "18/05/2022",
-        amount: "123.0",
-        currency: "EUR",
-      },
-      {
-        id: "pihn",
-        reference: "No reference provided",
-        category: {
-          name: "Rent",
-          color: "#ffbf84",
-        },
-        date: "17/06/2022",
-        amount: "1,023.0",
-        currency: "EUR",
-      },
-      {
-        id: "pihgrfn",
-        reference: "Other thing",
-        category: {
-          name: "Salary Taxes",
-          color: "#f6f2ab",
-        },
-        date: "24/06/2022",
-        amount: "43.0",
-        currency: "GPB",
-      },
-      {
-        id: "pi34hn",
-        reference: "Something",
-        category: {
-          name: "Tax Refund",
-          color: "#acdcff",
-        },
-        date: "01/07/2022",
-        amount: "12.0",
-        currency: "EUR",
-      },
-    ];
-    const accounts = [
-      "Account One",
-      "Account Two",
-      "Account Three",
-      "Account Four",
-      "Account Five",
-    ];
-    const banks = ["Activo Bank", "Revolut", "Wise", "Millenium"];
 
-    //Provide
-    provide("transactions", transactions);
+  // apollo: {
+  //   accounts: {
+  //     query: ALL_ACCOUNTS,
+  //     prefetch: true,
+  //   },
+  // },
+
+  async asyncData({ app, store }) {
+    const client = app.apolloProvider.defaultClient;
+
+    const accountsResponse = await client.query({
+      query: ALL_ACCOUNTS,
+      prefetch: true,
+    });
+
+    const { accounts } = accountsResponse.data;
+
+    const transactionsResponse = await client.query({
+      query: TRANSACTIONS,
+      prefetch: true,
+    });
+
+    const { transactions } = transactionsResponse.data;
+    console.log("TRANSACTIONS", transactions);
+    // console.log("RES ASYNCDATA", accounts);
+
+    const accountsName = new Set();
+    const banks = new Set();
+
+    accounts.forEach(({ name, bank }) => {
+      accountsName.add(name);
+      banks.add(bank);
+    });
+
+    // console.log("SET BANKS", banks);
+    // console.log("SET ACCOUNTS", accountsName);
+
+    const accountsArray = [...accountsName];
+    const banksArray = [...banks];
+
+    store.dispatch("accounts/setAccountsName", accountsArray);
+    store.dispatch("accounts/setBanks", banksArray);
 
     return {
-      //Data
+      accountsArray,
+      banksArray,
       transactions,
-      accounts,
-      banks,
     };
   },
 };

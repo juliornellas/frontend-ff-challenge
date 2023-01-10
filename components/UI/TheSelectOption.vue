@@ -19,12 +19,7 @@
 
 <script>
 export default {
-  props: {
-    options: {
-      type: Array,
-      required: true,
-    },
-  },
+  props: ["options"],
   setup() {
     const selected = "No filter applied";
     return {

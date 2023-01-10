@@ -1,29 +1,24 @@
 <template>
   <tbody class="align-baseline h-100">
-    <tr v-for="transaction in transactions" :key="transaction.id">
+    <tr v-for="transaction in data" :key="transaction.id">
       <td
-        class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal dark:text-sky-400"
+        class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal"
+        :class="transaction.reference || 'text-gray-400'"
       >
-        {{ transaction.reference }}
+        {{ transaction.reference || "No reference" }}
       </td>
-      <td
-        class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal dark:text-sky-400"
-      >
+      <td class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal">
         <span
           class="border border-none rounded-md p-2"
-          :style="{ 'background-color': transaction.category.color }"
+          :style="{ 'background-color': transaction?.category?.color }"
         >
-          {{ transaction.category.name }}
+          {{ transaction?.category?.name }}
         </span>
       </td>
-      <td
-        class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal dark:text-sky-400"
-      >
-        {{ transaction.date }}
+      <td class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal">
+        {{ transaction.date | filter }}
       </td>
-      <td
-        class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal dark:text-sky-400"
-      >
+      <td class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal">
         {{ transaction.amount }}
         <span class="text-xs text-gray-400">{{ transaction.currency }}</span>
       </td>
@@ -32,21 +27,35 @@
 </template>
 
 <script>
-import { inject } from "vue";
+// import { computed } from "vue";
+// import { inject } from "vue";
 export default {
+  props: {
+    transactions: {
+      type: Array,
+      required: true,
+    },
+  },
   name: "TransactionsList",
-  // props: {
-  //   transactions: {
-  //     type: Array,
-  //     required: true,
-  //   },
+  // setup() {
+  //   const transactions = inject("transactions");
+
+  //   return {
+  //     transactions,
+  //   };
   // },
+
   setup() {
-    const transactions = inject("transactions");
+    const data = "";
 
     return {
-      transactions,
+      data,
     };
+  },
+
+  created() {
+    this.data = this.transactions;
+    console.log("DATA TRANSACTIONS", this.data);
   },
 };
 </script>
