@@ -5,8 +5,8 @@ const dateFilter = (value) => {
 };
 function formatDate(value) {
   console.log("FORMAT DATE");
-  let date = split(value, " ");
-  return date[0];
+  const date = value.split(" ");
+  return date[0].split("-").reverse().join("/");
 }
 
 Vue.filter("date", dateFilter);

@@ -16,7 +16,7 @@
         </span>
       </td>
       <td class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal">
-        {{ transaction.date | filter }}
+        {{ transaction.date | date }}
       </td>
       <td class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal">
         {{ transaction.amount }}
