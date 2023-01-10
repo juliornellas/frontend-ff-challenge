@@ -1,9 +1,9 @@
 <template>
   <table class="w-full text-left border-collapse">
     <!-- Transaction header -->
-    <TheTransactionTableHeader />
+    <TheTransactionTableHeader @sort="sortTransactions" />
     <!-- Transactions list -->
-    <TransactionsList :transactions="transactions" />
+    <TransactionsList :transactions="data" />
   </table>
 </template>
 
@@ -21,6 +21,26 @@ export default {
   components: {
     TransactionsList,
     TheTransactionTableHeader,
+  },
+
+  setup(props) {
+    const data = props.transactions;
+
+    let sort = false;
+
+    const sortTransactions = () => {
+      sort = !sort;
+      data.sort((a, b) => {
+        return sort
+          ? new Date(b.date) - new Date(a.date)
+          : new Date(a.date) - new Date(b.date);
+      });
+    };
+
+    return {
+      sortTransactions,
+      data,
+    };
   },
 };
 </script>

@@ -26,6 +26,7 @@
           class="pl-2 py-2 pr-2 border-b border-slate-200 dark:border-slate-400/20"
         >
           Date
+          <span @click="$emit('sort')"> # </span>
         </div>
       </th>
       <th
@@ -40,3 +41,9 @@
     </tr>
   </thead>
 </template>
+
+<script>
+export default {
+  name: "TheTransactionTableHeader",
+};
+</script>
