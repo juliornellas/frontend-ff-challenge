@@ -9,6 +9,8 @@
 
 ## Build Setup
 
+Follow the steps below:
+
 ```bash
 # install dependencies
 $ npm install
