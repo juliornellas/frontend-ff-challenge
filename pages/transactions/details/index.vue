@@ -31,31 +31,38 @@
       <div class="mt-2">
         <h3 class="block">
           <span class="font-bold"> Category </span>
-          <!-- <TheButton
-            class="ml-2 text-xs text-gray-500 px-2 py-1 hover:bg-green-300"
+          <TheButton
+            class="ml-2 text-xs text-gray-500 px-2 py-1"
+            :class="show ? 'hover:bg-gray-300' : 'hover:bg-green-300'"
             @clicked="showOrHide"
           >
             <template>
-              {{ show ? "Close New category" : "+ New category" }}
+              {{ show ? "Cancel" : "New category" }}
             </template>
-          </TheButton> -->
+          </TheButton>
         </h3>
-        <div>
+        <div v-if="!show">
           <TheSelectOption
             :options="categoriesName"
             :selected="category.name"
-            class="mt-2 shadow-md"
+            class="mt-2 shadow-md py-1.5"
             @selected="selectedOption"
           ></TheSelectOption>
         </div>
-        <div class="mt-2 grid grid-flow-col auto-cols-auto">
+        <div v-else class="mt-2">
           <TheInput
-            placeholder="Tap here to create a new category"
+            placeholder="Tap here and press ENTER to create a new category"
             class="w-full border border rounded px-2 py-1 shadow-md"
+            @input="inputCreate"
           />
-          <TheButton class="font-bold hover:bg-green-200">
-            <template> Create and Add to</template>
-          </TheButton>
+          <div class="mt-2 flex align-center justify-start">
+            <label for="pick-color">Choose the category color:</label>
+            <input
+              class="ml-2"
+              type="color"
+              :value="category.color ? '#' + category.color : ''"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -77,6 +84,7 @@ import TheSelectOption from "~/components/UI/TheSelectOption.vue";
 import TheButton from "~/components/UI/TheButton.vue";
 import TheInput from "~/components/UI/TheInput.vue";
 import gql from "graphql-tag";
+import { ref } from "vue";
 
 const TRANSACTION = gql`
   query getTransaction($id: ID!) {
@@ -167,21 +175,27 @@ export default {
   },
 
   setup() {
-    let show = false;
+    let show = ref(false);
+    let newCategory = "";
 
     const showOrHide = () => {
-      show = !show;
-      console.log("Show or hide", show);
+      show.value = !show.value;
     };
 
     const selectedOption = (e) => {
-      console.log("Selected Option in Details", e);
+      newCategory = e.value;
+    };
+
+    const inputCreate = (e) => {
+      console.log("Input for create category", e);
     };
 
     return {
       show,
+      newCategory,
       showOrHide,
       selectedOption,
+      inputCreate,
     };
   },
 };

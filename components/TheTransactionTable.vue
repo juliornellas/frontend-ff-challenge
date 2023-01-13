@@ -1,7 +1,8 @@
 <template>
   <table class="w-full text-left border-collapse">
     <!-- Transaction header -->
-    <TheTransactionTableHeader @sort="sortTransactions" />
+    <!-- <TheTransactionTableHeader @sort="sortTransactions" /> -->
+    <TheTransactionTableHeader />
     <!-- Transactions list -->
     <TransactionsList :transactions="transactions" :categories="categories" />
   </table>
@@ -10,6 +11,7 @@
 <script>
 import TransactionsList from "@/components/TransactionsList.vue";
 import TheTransactionTableHeader from "./UI/TheTransactionTableHeader.vue";
+import { ref } from "vue";
 
 export default {
   props: {
@@ -28,19 +30,19 @@ export default {
   },
 
   setup({ transactions, categories }) {
-    let sort = false;
+    // let sort = false;
 
-    const sortTransactions = () => {
-      sort = !sort;
-      transactions.sort((a, b) => {
-        return sort
-          ? new Date(b.date) - new Date(a.date)
-          : new Date(a.date) - new Date(b.date);
-      });
-    };
+    // const sortTransactions = () => {
+    //   sort = !sort;
+    //   transactions.value.sort((a, b) => {
+    //     return sort
+    //       ? new Date(b.date) - new Date(a.date)
+    //       : new Date(a.date) - new Date(b.date);
+    //   });
+    // };
 
     return {
-      sortTransactions,
+      // sortTransactions,
       transactions,
       categories,
     };

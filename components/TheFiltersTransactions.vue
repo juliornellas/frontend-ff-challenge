@@ -4,6 +4,7 @@
     <div class="font-normal">
       <label class="text-xs form-label inline-block">Search</label>
       <TheInput
+        class="h-8"
         placeholder="Search by bank, account, reference, category, date, amount, currency..."
         @input="inputSearch"
       />
@@ -13,6 +14,7 @@
     <div class="font-normal ml-2">
       <label class="text-xs form-label inline-block">Bank</label>
       <TheSelectOption
+        class="h-8"
         name="bank"
         id="bank"
         :options="banks"
@@ -24,6 +26,7 @@
     <div class="font-normal ml-2">
       <label class="text-xs form-label inline-block">Account</label>
       <TheSelectOption
+        class="h-8"
         name="account"
         id="account"
         :options="accounts"
@@ -34,13 +37,17 @@
     <!-- Starting month -->
     <div class="font-normal ml-2">
       <label class="text-xs form-label inline-block">Starting month</label>
-      <TheMonthDate @selected="selectedStartingMonth" type="month" />
+      <TheMonthDate
+        class="h-8"
+        @selected="selectedStartingMonth"
+        type="month"
+      />
     </div>
 
     <!-- Ending month -->
     <div class="font-normal ml-2">
       <label class="text-xs form-label inline-block">Ending month</label>
-      <TheMonthDate @selected="selectedEndingMonth" type="month" />
+      <TheMonthDate class="h-8" @selected="selectedEndingMonth" type="month" />
     </div>
   </div>
 </template>
@@ -50,6 +57,7 @@ import TheInput from "@/components/UI/TheInput.vue";
 import TheSelectOption from "@/components/UI/TheSelectOption.vue";
 import TheMonthDate from "@/components/UI/TheMonthDate.vue";
 
+import { ref } from "vue";
 export default {
   components: {
     TheInput,
@@ -70,32 +78,32 @@ export default {
 
   setup() {
     //Data
-    let search = "";
-    let account = "";
-    let bank = "";
-    let startingMonth = "";
-    let endingMonth = "";
+    let search = ref("");
+    let account = ref("");
+    let bank = ref("");
+    let startingMonth = ref("");
+    let endingMonth = ref("");
 
     //Methods
     const selectedAccount = (event) => {
-      account = event;
-      console.log("The selected value for Account is", account);
+      account.value = event;
+      console.log("The selected value for Account is", account.value);
     };
     const selectedBank = (event) => {
-      bank = event;
-      console.log("The selected value for Bank is", bank);
+      bank.value = event;
+      console.log("The selected value for Bank is", bank.value);
     };
     const inputSearch = (event) => {
       console.log("Searching for:", event);
     };
     const selectedStartingMonth = (event) => {
-      startingMonth = event;
-      console.log("The selected starting month is:", event);
+      startingMonth.value = event;
+      console.log("The selected starting month is:", startingMonth.value);
     };
     const selectedEndingMonth = (event) => {
       //Compare dates
-      endingMonth = event;
-      console.log("The selected ending month is:", event);
+      endingMonth.value = event;
+      console.log("The selected ending month is:", endingMonth.value);
     };
 
     return {

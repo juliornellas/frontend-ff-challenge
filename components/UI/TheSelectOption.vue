@@ -1,8 +1,8 @@
 <template>
   <select
     @click="selectedOption"
-    class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white border border-solid border-gray-300 rounded transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-green-500 focus:outline-none"
-    v-model="selected"
+    class="w-full border rounded px-3 text-base font-normal text-gray-700 bg-white transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-green-500 focus:outline-none"
+    v-model="sel"
   >
     <option disabled value="">{{ message }}</option>
     <option disabled></option>
@@ -18,6 +18,8 @@
 </template>
 
 <script>
+import { ref } from "vue";
+
 export default {
   emits: ["selected"],
   props: {
@@ -31,15 +33,16 @@ export default {
       default: "No filter applied",
     },
   },
-  setup({ selected }) {
-    let message = "No filter applied";
+  setup({ selected }, { emit }) {
+    let message = ref("No filter applied");
+    let sel = ref(selected);
 
     const selectedOption = () => {
-      $emit("selected", selected);
+      emit("selected", sel);
     };
 
     return {
-      selected,
+      sel,
       message,
       selectedOption,
     };

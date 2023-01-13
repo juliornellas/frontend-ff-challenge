@@ -47,6 +47,7 @@
 
 <script>
 export default {
+  emits: ["sort"],
   name: "TheTransactionTableHeader",
 };
 </script>
