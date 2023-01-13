@@ -10,13 +10,15 @@
 
     <!-- Transactions -->
     <div class="mt-4 overflow-y-auto">
-      <TheTransactionTable :transactions="transactions" />
+      <TheTransactionTable
+        :transactions="transactions"
+        :categories="categories"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import { provide } from "vue";
 import TheTransactionTable from "@/components/TheTransactionTable.vue";
 import TheFiltersTransactions from "@/components/TheFiltersTransactions.vue";
 import gql from "graphql-tag";
@@ -34,6 +36,9 @@ const ALL_ACCOUNTS = gql`
 const TRANSACTIONS = gql`
   query getTransactions {
     transactions {
+      id
+      accountId
+      categoryId
       reference
       amount
       currency
@@ -42,38 +47,47 @@ const TRANSACTIONS = gql`
   }
 `;
 
+const ALL_CATEGORIES = gql`
+  query getCategories {
+    categories {
+      id
+      name
+      color
+    }
+  }
+`;
+
 export default {
-  name: "IndexPage",
+  name: "TransactionsPage",
   components: {
     TheTransactionTable,
     TheFiltersTransactions,
   },
 
-  // apollo: {
-  //   accounts: {
-  //     query: ALL_ACCOUNTS,
-  //     prefetch: true,
-  //   },
-  // },
-
   async asyncData({ app, store }) {
+    //Apollo client
     const client = app.apolloProvider.defaultClient;
 
+    //Accounts
     const accountsResponse = await client.query({
       query: ALL_ACCOUNTS,
       prefetch: true,
     });
-
     const { accounts } = accountsResponse.data;
 
+    //Transactions
     const transactionsResponse = await client.query({
       query: TRANSACTIONS,
       prefetch: true,
     });
-
     const { transactions } = transactionsResponse.data;
-    console.log("TRANSACTIONS", transactions);
-    // console.log("RES ASYNCDATA", accounts);
+
+    //Categories
+    const categoriesResponse = await client.query({
+      query: ALL_CATEGORIES,
+      prefetch: true,
+    });
+    const { categories } = categoriesResponse.data;
 
     const accountsName = new Set();
     const banks = new Set();
@@ -83,19 +97,18 @@ export default {
       banks.add(bank);
     });
 
-    // console.log("SET BANKS", banks);
-    // console.log("SET ACCOUNTS", accountsName);
-
     const accountsArray = [...accountsName];
     const banksArray = [...banks];
 
-    store.dispatch("accounts/setAccountsName", accountsArray);
-    store.dispatch("accounts/setBanks", banksArray);
+    //Just for note
+    // store.dispatch("accounts/setAccountsName", accountsArray);
+    // store.dispatch("accounts/setBanks", banksArray);
 
     return {
       accountsArray,
       banksArray,
       transactions,
+      categories,
     };
   },
 };

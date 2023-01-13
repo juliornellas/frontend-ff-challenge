@@ -1,18 +1,28 @@
 <template>
   <tbody class="align-baseline h-100">
-    <tr v-for="transaction in data" :key="transaction.id">
+    <tr v-for="transaction in allTransactions" :key="transaction.id">
+      <!-- @click="transactionDetails(transaction)" -->
       <td
         class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal"
         :class="transaction.reference || 'text-gray-400'"
       >
-        {{ transaction.reference || "No reference" }}
+        <nuxt-link
+          :to="{
+            name: 'transactions-details',
+            params: {
+              data: { transaction: transaction.id, categories: allCategories },
+            },
+          }"
+        >
+          {{ transaction.reference || "No reference" }}
+        </nuxt-link>
       </td>
       <td class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal">
         <span
           class="border border-none rounded-md p-2"
           :style="{ 'background-color': transaction?.category?.color }"
         >
-          {{ transaction?.category?.name }}
+          {{ transaction?.categoryName }}
         </span>
       </td>
       <td class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal">
@@ -27,11 +37,15 @@
 </template>
 
 <script>
-// import { computed } from "vue";
 // import { inject } from "vue";
+
 export default {
   props: {
     transactions: {
+      type: Array,
+      required: true,
+    },
+    categories: {
       type: Array,
       required: true,
     },
@@ -45,17 +59,14 @@ export default {
   //   };
   // },
 
-  setup() {
-    const data = "";
+  setup({ transactions, categories }) {
+    const allTransactions = [...transactions];
+    const allCategories = [...categories];
 
     return {
-      data,
+      allTransactions,
+      allCategories,
     };
-  },
-
-  created() {
-    this.data = this.transactions;
-    console.log("DATA TRANSACTIONS", this.data);
   },
 };
 </script>

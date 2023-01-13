@@ -3,7 +3,7 @@
     <!-- Transaction header -->
     <TheTransactionTableHeader @sort="sortTransactions" />
     <!-- Transactions list -->
-    <TransactionsList :transactions="data" />
+    <TransactionsList :transactions="transactions" :categories="categories" />
   </table>
 </template>
 
@@ -17,20 +17,22 @@ export default {
       type: Array,
       required: true,
     },
+    categories: {
+      type: Array,
+      required: true,
+    },
   },
   components: {
     TransactionsList,
     TheTransactionTableHeader,
   },
 
-  setup(props) {
-    const data = props.transactions;
-
+  setup({ transactions, categories }) {
     let sort = false;
 
     const sortTransactions = () => {
       sort = !sort;
-      data.sort((a, b) => {
+      transactions.sort((a, b) => {
         return sort
           ? new Date(b.date) - new Date(a.date)
           : new Date(a.date) - new Date(b.date);
@@ -39,7 +41,8 @@ export default {
 
     return {
       sortTransactions,
-      data,
+      transactions,
+      categories,
     };
   },
 };

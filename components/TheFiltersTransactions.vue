@@ -3,7 +3,10 @@
     <!-- Search -->
     <div class="font-normal">
       <label class="text-xs form-label inline-block">Search</label>
-      <TheInput @search="inputSearch" />
+      <TheInput
+        placeholder="Search by bank, account, reference, category, date, amount, currency..."
+        @input="inputSearch"
+      />
     </div>
 
     <!-- Bank -->
