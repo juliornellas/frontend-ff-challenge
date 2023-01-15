@@ -53,7 +53,7 @@
           <TheInput
             placeholder="Tap here and press ENTER to create a new category"
             class="w-full border border rounded px-2 py-1 shadow-md"
-            @input="inputCreate"
+            @inputSearch="inputCreate"
           />
           <div class="mt-2 flex align-center justify-start">
             <label for="pick-color">Choose the category color:</label>

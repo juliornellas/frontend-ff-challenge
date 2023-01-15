@@ -11,7 +11,7 @@
 <script>
 import TransactionsList from "@/components/TransactionsList.vue";
 import TheTransactionTableHeader from "./UI/TheTransactionTableHeader.vue";
-import { ref } from "vue";
+import { computed, reactive, ref } from "vue";
 
 export default {
   props: {
@@ -29,23 +29,13 @@ export default {
     TheTransactionTableHeader,
   },
 
-  setup({ transactions, categories }) {
-    // let sort = false;
+  // setup({ transactions, categories }) {
+  //   let filtered = ref([...transactions]);
 
-    // const sortTransactions = () => {
-    //   sort = !sort;
-    //   transactions.value.sort((a, b) => {
-    //     return sort
-    //       ? new Date(b.date) - new Date(a.date)
-    //       : new Date(a.date) - new Date(b.date);
-    //   });
-    // };
-
-    return {
-      // sortTransactions,
-      transactions,
-      categories,
-    };
-  },
+  //   return {
+  //     filtered,
+  //     categories,
+  //   };
+  // },
 };
 </script>

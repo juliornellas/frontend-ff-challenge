@@ -5,8 +5,8 @@
       <label class="text-xs form-label inline-block">Search</label>
       <TheInput
         class="h-8"
-        placeholder="Search by bank, account, reference, category, date, amount, currency..."
-        @input="inputSearch"
+        placeholder="Search by reference, amount or currency"
+        @inputSearch="inputSearch"
       />
     </div>
 
@@ -65,6 +65,15 @@ export default {
     TheMonthDate,
   },
 
+  emits: [
+    "inputSearch",
+    "searchAccount",
+    "searchBank",
+    "inputSearch",
+    "searchStartingMonth",
+    "searchEndingMonth",
+  ],
+
   props: {
     banks: {
       type: Array,
@@ -76,7 +85,7 @@ export default {
     },
   },
 
-  setup() {
+  setup(_, { emit }) {
     //Data
     let search = ref("");
     let account = ref("");
@@ -87,23 +96,22 @@ export default {
     //Methods
     const selectedAccount = (event) => {
       account.value = event;
-      console.log("The selected value for Account is", account.value);
+      emit("searchAccount", account.value);
     };
     const selectedBank = (event) => {
       bank.value = event;
-      console.log("The selected value for Bank is", bank.value);
+      emit("searchBank", bank.value);
     };
     const inputSearch = (event) => {
-      console.log("Searching for:", event);
+      emit("inputSearch", event);
     };
     const selectedStartingMonth = (event) => {
       startingMonth.value = event;
-      console.log("The selected starting month is:", startingMonth.value);
+      emit("searchStartingMonth", startingMonth.value);
     };
     const selectedEndingMonth = (event) => {
-      //Compare dates
       endingMonth.value = event;
-      console.log("The selected ending month is:", endingMonth.value);
+      emit("searchEndingMonth", endingMonth.value);
     };
 
     return {
