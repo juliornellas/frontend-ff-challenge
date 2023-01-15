@@ -11,7 +11,7 @@
 <script>
 import TransactionsList from "@/components/TransactionsList.vue";
 import TheTransactionTableHeader from "./UI/TheTransactionTableHeader.vue";
-import { computed, reactive, ref } from "vue";
+// import { computed, reactive, ref } from "vue";
 
 export default {
   props: {
@@ -29,6 +29,20 @@ export default {
     TheTransactionTableHeader,
   },
 
+  // data() {
+  //   return {
+  //     filteredTransactions: [],
+  //   };
+  // },
+
+  // computed: {
+  //   filtered() {
+  //     console.log("fitlered table before", this.transactions);
+  //     this.filteredTransactions = this.transactions;
+  //     console.log("fitlered table", this.filteredTransactions);
+  //     return this.filteredTransactions;
+  //   },
+  // },
   // setup({ transactions, categories }) {
   //   let filtered = ref([...transactions]);
 

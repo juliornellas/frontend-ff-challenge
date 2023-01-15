@@ -1,6 +1,6 @@
 <template>
   <tbody class="align-baseline h-100">
-    <tr v-for="transaction in allTransactions" :key="transaction.id">
+    <tr v-for="transaction in transactions" :key="transaction.id">
       <!-- @click="transactionDetails(transaction)" -->
       <td
         class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal"
@@ -10,7 +10,7 @@
           :to="{
             name: 'transactions-details',
             params: {
-              data: { transaction: transaction.id, categories: allCategories },
+              data: { transaction: transaction.id },
             },
           }"
         >
@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { ref } from "vue";
 // import { inject } from "vue";
 
 export default {
@@ -59,14 +60,14 @@ export default {
   //   };
   // },
 
-  setup({ transactions, categories }) {
-    const allTransactions = [...transactions];
-    const allCategories = [...categories];
+  // setup({ transactions, categories }) {
+  //   const allTransactions = ref([...transactions]);
+  //   const allCategories = ref([...categories]);
 
-    return {
-      allTransactions,
-      allCategories,
-    };
-  },
+  //   return {
+  //     allTransactions,
+  //     allCategories,
+  //   };
+  // },
 };
 </script>

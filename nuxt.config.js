@@ -40,7 +40,6 @@ export default {
     clientConfigs: {
       default: {
         httpEndpoint: "http://localhost:9090",
-        // httpEndpoint: "https://rickandmortyapi.com/graphql/",
       },
     },
   },
