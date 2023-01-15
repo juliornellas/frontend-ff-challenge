@@ -37,9 +37,6 @@
 </template>
 
 <script>
-import { ref } from "vue";
-// import { inject } from "vue";
-
 export default {
   props: {
     transactions: {
@@ -52,22 +49,5 @@ export default {
     },
   },
   name: "TransactionsList",
-  // setup() {
-  //   const transactions = inject("transactions");
-
-  //   return {
-  //     transactions,
-  //   };
-  // },
-
-  // setup({ transactions, categories }) {
-  //   const allTransactions = ref([...transactions]);
-  //   const allCategories = ref([...categories]);
-
-  //   return {
-  //     allTransactions,
-  //     allCategories,
-  //   };
-  // },
 };
 </script>

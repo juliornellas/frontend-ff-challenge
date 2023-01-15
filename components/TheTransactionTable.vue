@@ -28,28 +28,5 @@ export default {
     TransactionsList,
     TheTransactionTableHeader,
   },
-
-  // data() {
-  //   return {
-  //     filteredTransactions: [],
-  //   };
-  // },
-
-  // computed: {
-  //   filtered() {
-  //     console.log("fitlered table before", this.transactions);
-  //     this.filteredTransactions = this.transactions;
-  //     console.log("fitlered table", this.filteredTransactions);
-  //     return this.filteredTransactions;
-  //   },
-  // },
-  // setup({ transactions, categories }) {
-  //   let filtered = ref([...transactions]);
-
-  //   return {
-  //     filtered,
-  //     categories,
-  //   };
-  // },
 };
 </script>
