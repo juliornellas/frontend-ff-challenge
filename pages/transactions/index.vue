@@ -22,7 +22,11 @@
     </div>
 
     <hr />
-    <ThePagination></ThePagination>
+    <ThePagination
+      @nextPage="nextPage"
+      @previousPage="previousPage"
+      :actual="actualPage"
+    ></ThePagination>
   </div>
 </template>
 
@@ -117,12 +121,11 @@ export default {
 
   data() {
     return {
-      filter: "",
+      filter: null,
       skip: 0,
       take: 10,
       ordeyBy: { date: "asc" },
       accountId: "",
-      times: 1,
       accountsName: [],
       banksName: [],
     };
@@ -152,6 +155,10 @@ export default {
       console.log("banks options", names);
       return (this.banksName = [...names]);
     },
+
+    actualPage() {
+      return (this.skip + this.take) / this.take;
+    },
   },
 
   methods: {
@@ -169,6 +176,16 @@ export default {
     },
     searchEndingMonth(e) {
       console.log("Search for Ending month", e);
+    },
+
+    nextPage() {
+      console.log("NEXT PAGE");
+      return (this.skip += this.take);
+    },
+
+    previousPage() {
+      console.log("PREVIOUS PAGE");
+      return this.skip >= 10 && (this.skip -= this.take);
     },
   },
 };
