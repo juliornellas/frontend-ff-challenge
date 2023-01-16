@@ -164,6 +164,8 @@ export default {
   methods: {
     inputSearch(e) {
       this.filter = e;
+      this.skip = 0;
+      this.take = 10;
     },
     searchAccount(e) {
       this.accountId = e;
