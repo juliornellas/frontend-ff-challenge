@@ -13,7 +13,7 @@
     <!-- Bank -->
     <div class="font-normal ml-2">
       <label class="text-xs form-label inline-block">Bank</label>
-      <TheSelectOption
+      <TheSelectOptionForSet
         class="h-8"
         name="bank"
         id="bank"
@@ -55,6 +55,7 @@
 <script>
 import TheInput from "@/components/UI/TheInput.vue";
 import TheSelectOption from "@/components/UI/TheSelectOption.vue";
+import TheSelectOptionForSet from "@/components/UI/TheSelectOptionForSet.vue";
 import TheMonthDate from "@/components/UI/TheMonthDate.vue";
 
 import { ref } from "vue";
@@ -62,6 +63,7 @@ export default {
   components: {
     TheInput,
     TheSelectOption,
+    TheSelectOptionForSet,
     TheMonthDate,
   },
 

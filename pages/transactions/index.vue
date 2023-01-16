@@ -130,16 +130,19 @@ export default {
     filtered() {
       return this.filteredTransactions;
     },
+
     accountsOptions() {
-      const names = new Set();
-      this.accounts.forEach(({ name }) => {
-        names.add(name);
+      console.log("ACCOUNTS options", this.accounts);
+      const names = [];
+      this.accounts.forEach(({ name, id }) => {
+        names.push({ name, id });
       });
       console.log("accounts options", names);
       return (this.accountsName = [...names]);
     },
 
     banksOptions() {
+      console.log("BANKS options", this.accounts);
       const names = new Set();
       this.accounts.forEach(({ bank }) => {
         names.add(bank);

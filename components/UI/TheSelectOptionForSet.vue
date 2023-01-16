@@ -10,10 +10,10 @@
       <option
         v-for="(option, index) in options"
         :key="index"
-        :value="option.id"
-        :name="option.name"
+        :value="option"
+        :name="option"
       >
-        {{ option.name }}
+        {{ option }}
       </option>
     </select>
   </div>
