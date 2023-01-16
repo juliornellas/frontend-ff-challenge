@@ -14,7 +14,6 @@
     <div class="font-normal ml-2">
       <label class="text-xs form-label inline-block">Bank</label>
       <TheSelectOptionForSet
-        class="h-8"
         name="bank"
         id="bank"
         :options="banks"
@@ -26,7 +25,6 @@
     <div class="font-normal ml-2">
       <label class="text-xs form-label inline-block">Account</label>
       <TheSelectOption
-        class="h-8"
         name="account"
         id="account"
         :options="accounts"
