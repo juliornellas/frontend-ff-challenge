@@ -37,12 +37,14 @@ export const ALL_CATEGORIES = gql`
 export const FILTERED_TRANSACTIONS = gql`
   query FilteredTransactions(
     $filter: String
+    $accountId: String
     $skip: Int
     $take: Int
     $orderBy: TransactionsOrderByInput
   ) {
     filteredTransactions(
       filter: $filter
+      accountId: $accountId
       skip: $skip
       take: $take
       orderBy: $orderBy

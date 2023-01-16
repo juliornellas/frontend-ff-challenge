@@ -100,6 +100,7 @@ export default {
           filter: this.filter,
           skip: this.skip,
           take: this.take,
+          accountId: this.accountId,
           ordeyBy: this.orderBy,
         };
       },
@@ -120,6 +121,7 @@ export default {
       skip: 0,
       take: 10,
       ordeyBy: { date: "asc" },
+      accountId: "",
       times: 1,
       accountsName: [],
       banksName: [],
@@ -154,11 +156,10 @@ export default {
 
   methods: {
     inputSearch(e) {
-      console.log("MAIN PAGE SEARCH", e);
       this.filter = e;
     },
     searchAccount(e) {
-      console.log("Search for account", e);
+      this.accountId = e;
     },
     searchBank(e) {
       console.log("Search for bank", e);
