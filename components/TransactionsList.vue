@@ -10,7 +10,7 @@
           :to="{
             name: 'transactions-details',
             params: {
-              data: { transaction: transaction.id },
+              data: { transaction: transaction.id, categories: categories },
             },
           }"
         >
