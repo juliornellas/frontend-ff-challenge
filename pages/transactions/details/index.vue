@@ -42,12 +42,12 @@
           </TheButton>
         </h3>
         <div v-if="!show">
-          <TheSelectOption
+          <TheSelectOptionForSet
             :options="categoriesName"
             :selected="category.name"
             class="mt-2 shadow-md py-1.5"
             @selected="selectedOption"
-          ></TheSelectOption>
+          ></TheSelectOptionForSet>
         </div>
         <div v-else class="mt-2">
           <TheInput
@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import TheSelectOption from "~/components/UI/TheSelectOption.vue";
+import TheSelectOptionForSet from "~/components/UI/TheSelectOptionForSet.vue";
 import TheButton from "~/components/UI/TheButton.vue";
 import TheInput from "~/components/UI/TheInput.vue";
 import gql from "graphql-tag";
@@ -121,7 +121,7 @@ const ACCOUNT = gql`
 
 export default {
   components: {
-    TheSelectOption,
+    TheSelectOptionForSet,
     TheButton,
     TheInput,
   },
