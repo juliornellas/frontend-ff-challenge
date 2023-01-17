@@ -57,7 +57,7 @@
       @previousPage="previousPage"
       @goToPage="goToPage"
       :actual="actualPage"
-      :size="filtered.length"
+      :hasPages="hasPages"
     ></ThePagination>
   </div>
 </template>
@@ -194,6 +194,9 @@ export default {
         this.skip = 0;
       }
       return (this.skip + this.take) / this.take;
+    },
+    hasPages() {
+      return this.filtered.length === 10;
     },
   },
 
