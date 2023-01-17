@@ -17,7 +17,9 @@
           {{ transaction.reference || "No reference" }}
         </nuxt-link>
       </td>
-      <td class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal">
+      <td
+        class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal text-right"
+      >
         <span
           class="border border-none rounded-md p-2"
           :style="{ 'background-color': transaction?.category?.color }"
@@ -25,10 +27,14 @@
           {{ transaction?.categoryName }}
         </span>
       </td>
-      <td class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal">
+      <td
+        class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal text-right"
+      >
         {{ transaction.date | date }}
       </td>
-      <td class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal">
+      <td
+        class="py-4 pl-2 font-mono font-medium text-xs whitespace-normal text-right"
+      >
         {{ transaction.amount }}
         <span class="text-xs text-gray-400">{{ transaction.currency }}</span>
       </td>
