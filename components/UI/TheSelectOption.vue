@@ -23,6 +23,7 @@
 import { ref } from "vue";
 
 export default {
+  name: "TheSelectOption",
   emits: ["selected"],
   props: {
     options: {

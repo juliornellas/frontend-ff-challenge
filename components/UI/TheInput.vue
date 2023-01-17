@@ -10,6 +10,7 @@
 <script>
 import { ref } from "vue";
 export default {
+  name: "TheInput",
   emits: ["inputSearch"],
   setup() {
     const input = ref("");

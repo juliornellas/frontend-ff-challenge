@@ -91,7 +91,7 @@ export default {
     };
 
     const goToPage = (e) => {
-      console.log("Go to page:", e);
+      emit("goToPage", e);
     };
 
     return {

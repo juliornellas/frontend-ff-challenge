@@ -51,16 +51,12 @@
 </template>
 
 <script>
-import TheInput from "@/components/UI/TheInput.vue";
-import TheSelectOption from "@/components/UI/TheSelectOption.vue";
 import TheSelectOptionForSet from "@/components/UI/TheSelectOptionForSet.vue";
 import TheMonthDate from "@/components/UI/TheMonthDate.vue";
 
 import { ref } from "vue";
 export default {
   components: {
-    TheInput,
-    TheSelectOption,
     TheSelectOptionForSet,
     TheMonthDate,
   },

@@ -25,6 +25,7 @@
     <ThePagination
       @nextPage="nextPage"
       @previousPage="previousPage"
+      @goToPage="goToPage"
       :actual="actualPage"
     ></ThePagination>
   </div>
@@ -188,6 +189,10 @@ export default {
     previousPage() {
       console.log("PREVIOUS PAGE");
       return this.skip >= 10 && (this.skip -= this.take);
+    },
+
+    goToPage(e) {
+      return (this.skip = (e - 1) * this.take);
     },
   },
 };
