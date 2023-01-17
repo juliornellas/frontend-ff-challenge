@@ -6,16 +6,25 @@
         <p class="text-lg font-semibold">Transactions</p>
       </div>
       <div class="flex items-end">
-        <p class="mr-2 text-gray-500 text-xs">Currency</p>
+        <a
+          v-if="currency"
+          href="#"
+          class="mr-2 text-gray-500 text-xs p-2 border rounded"
+          @click.prevent="cleanCurrency"
+        >
+          Clean currency filter
+        </a>
         <button
           @click="currencyOption('EUR')"
           class="border rounded px-4 py-1 hover:border-green-500"
+          :class="currency === 'EUR' ? 'border-green-600' : ''"
         >
           <font-awesome-icon icon="fa-solid fa-euro-sign" />
         </button>
         <button
           @click="currencyOption('GBP')"
           class="ml-2 border rounded px-4 py-1 hover:border-green-500"
+          :class="currency === 'GBP' ? 'border-green-600' : ''"
         >
           <font-awesome-icon icon="fa-solid fa-sterling-sign" />
         </button>
@@ -218,8 +227,10 @@ export default {
         : (this.ordeyBy = "asc");
     },
     currencyOption(e) {
-      console.log("CURRENCY OPTION", e);
       return (this.currency = e);
+    },
+    cleanCurrency() {
+      this.currency = "";
     },
   },
 };
