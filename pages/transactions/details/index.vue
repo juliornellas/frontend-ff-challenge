@@ -80,6 +80,9 @@
 </template>
 
 <script>
+import TheSelectOption from "~/components/UI/TheSelectOption.vue";
+import TheButton from "~/components/UI/TheButton.vue";
+import TheInput from "~/components/UI/TheInput.vue";
 import gql from "graphql-tag";
 import { ref } from "vue";
 
@@ -117,6 +120,12 @@ const ACCOUNT = gql`
 `;
 
 export default {
+  components: {
+    TheSelectOption,
+    TheButton,
+    TheInput,
+  },
+
   async asyncData({ app, params }) {
     //Apollo client
     const client = app.apolloProvider.defaultClient;

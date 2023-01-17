@@ -52,13 +52,17 @@
 
 <script>
 import TheSelectOptionForSet from "@/components/UI/TheSelectOptionForSet.vue";
+import TheSelectOption from "@/components/UI/TheSelectOption.vue";
 import TheMonthDate from "@/components/UI/TheMonthDate.vue";
+import TheInput from "@/components/UI/TheInput.vue";
 
 import { ref } from "vue";
 export default {
   components: {
     TheSelectOptionForSet,
+    TheSelectOption,
     TheMonthDate,
+    TheInput,
   },
 
   emits: [

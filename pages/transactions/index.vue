@@ -182,12 +182,10 @@ export default {
     },
 
     nextPage() {
-      console.log("NEXT PAGE");
       return (this.skip += this.take);
     },
 
     previousPage() {
-      console.log("PREVIOUS PAGE");
       return this.skip >= 10 && (this.skip -= this.take);
     },
 
