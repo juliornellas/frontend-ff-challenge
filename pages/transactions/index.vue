@@ -5,30 +5,11 @@
       <div>
         <p class="text-lg font-semibold">Transactions</p>
       </div>
-      <div class="flex items-end">
-        <a
-          v-if="currency"
-          href="#"
-          class="mr-2 text-gray-500 text-xs p-2 border rounded"
-          @click.prevent="cleanCurrency"
-        >
-          Clean currency filter
-        </a>
-        <button
-          @click="currencyOption('EUR')"
-          class="border rounded px-4 py-1 hover:border-green-500"
-          :class="currency === 'EUR' ? 'border-green-600' : ''"
-        >
-          <font-awesome-icon icon="fa-solid fa-euro-sign" />
-        </button>
-        <button
-          @click="currencyOption('GBP')"
-          class="ml-2 border rounded px-4 py-1 hover:border-green-500"
-          :class="currency === 'GBP' ? 'border-green-600' : ''"
-        >
-          <font-awesome-icon icon="fa-solid fa-sterling-sign" />
-        </button>
-      </div>
+      <TheCurrencyFilter
+        :currency="currency"
+        @currencyOption="currencyOption"
+        @cleanCurrency="cleanCurrency"
+      ></TheCurrencyFilter>
     </div>
 
     <!-- Filters -->
@@ -66,6 +47,7 @@
 import TheTransactionTable from "@/components/TheTransactionTable.vue";
 import TheFiltersTransactions from "@/components/TheFiltersTransactions.vue";
 import ThePagination from "@/components/UI/ThePagination.vue";
+import TheCurrencyFilter from "@/components/TheCurrencyFilter.vue";
 import {
   FILTERED_TRANSACTIONS,
   ALL_ACCOUNTS,
@@ -78,6 +60,7 @@ export default {
     TheTransactionTable,
     TheFiltersTransactions,
     ThePagination,
+    TheCurrencyFilter,
   },
 
   // async asyncData({ app, store }) {
