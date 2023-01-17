@@ -57,6 +57,7 @@
       @previousPage="previousPage"
       @goToPage="goToPage"
       :actual="actualPage"
+      :size="filtered.length"
     ></ThePagination>
   </div>
 </template>
@@ -189,6 +190,9 @@ export default {
       return (this.banksName = [...names]);
     },
     actualPage() {
+      if (this.filtered < this.skip) {
+        this.skip = 0;
+      }
       return (this.skip + this.take) / this.take;
     },
   },

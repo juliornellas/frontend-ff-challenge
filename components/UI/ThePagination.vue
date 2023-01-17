@@ -80,6 +80,10 @@ export default {
       type: Number,
       required: true,
     },
+    size: {
+      type: Number,
+      required: true,
+    },
   },
   setup(_, { emit }) {
     const previousPage = () => {
