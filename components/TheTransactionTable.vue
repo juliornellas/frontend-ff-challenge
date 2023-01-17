@@ -2,7 +2,7 @@
   <table class="w-full text-left border-collapse">
     <!-- Transaction header -->
     <!-- <TheTransactionTableHeader @sort="sortTransactions" /> -->
-    <TheTransactionTableHeader />
+    <TheTransactionTableHeader @sort="$emit('sort')" />
     <!-- Transactions list -->
     <TransactionsList :transactions="transactions" :categories="categories" />
   </table>

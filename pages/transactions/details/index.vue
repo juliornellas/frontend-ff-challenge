@@ -83,41 +83,9 @@
 import TheSelectOptionForSet from "~/components/UI/TheSelectOptionForSet.vue";
 import TheButton from "~/components/UI/TheButton.vue";
 import TheInput from "~/components/UI/TheInput.vue";
-import gql from "graphql-tag";
 import { ref } from "vue";
-
-const TRANSACTION = gql`
-  query getTransaction($id: ID!) {
-    transaction(id: $id) {
-      id
-      reference
-      amount
-      currency
-      date
-      accountId
-      updatedAt
-      categoryId
-    }
-  }
-`;
-
-const CATEGORY = gql`
-  query getCategory($id: ID!) {
-    category(id: $id) {
-      name
-      color
-    }
-  }
-`;
-
-const ACCOUNT = gql`
-  query getAccount($id: ID!) {
-    account(id: $id) {
-      name
-      bank
-    }
-  }
-`;
+import { TRANSACTION, CATEGORY, ACCOUNT } from "~/api/queries.js";
+import { UPDATE_CATEGORY, CREATE_CATEGORY } from "~/api/mutations.js";
 
 export default {
   components: {
@@ -198,5 +166,95 @@ export default {
       inputCreate,
     };
   },
+
+  // apollo: {
+  //   // updateCategory: {
+  //   //   mutation: UPDATE_CATEGORY,
+  //   //   variables() {
+  //   //     return {
+  //   //       id: this.categoryId,
+  //   //       name: this.categoryName,
+  //   //       color: this.categoryColor,
+  //   //     };
+  //   //   },
+  //   // },
+  //   transaction: {
+  //     query: TRANSACTION,
+  //     variable() {
+  //       return {
+  //         id: this.$route.params.data.transaction,
+  //       };
+  //     },
+  //     prefetch: true,
+  //   },
+  //   // category: {
+  //   //   query: CATEGORY,
+  //   //   variable() {
+  //   //     return {
+  //   //       id: this.accountId,
+  //   //     };
+  //   //   },
+  //   //   prefetch: true,
+  //   // },
+  //   // account: {
+  //   //   query: ACCOUNT,
+  //   //   variable() {
+  //   //     return {
+  //   //       id: this.accountId,
+  //   //     };
+  //   //   },
+  //   //   prefetch: true,
+  //   // },
+  // },
+
+  // data() {
+  //   return {
+  //     transactionId: "",
+  //     show: false,
+  //     changedCategoryName: "",
+  //     newCategoryName: "",
+  //     newCategoryColor: "",
+  //     categories: [],
+  //   };
+  // },
+
+  // methods: {
+  //   showOrHide() {
+  //     this.show = !this.show;
+  //   },
+  //   selectedOption(e) {
+  //     this.changedCategoryName = e;
+  //   },
+  //   inputCreate(e) {
+  //     console.log("Input for create category", e);
+  //   },
+  //   createCategory() {
+  //     this.$apollo
+  //       .mutate({
+  //         mutation: CREATE_CATEGORY,
+  //         variables: {
+  //           name: this.newCategoryName,
+  //           color: this.newCategoryColor,
+  //         },
+  //       })
+  //       .then((data) => console.log("Category created", data));
+  //   },
+  // },
+
+  // computed: {
+  //   theAccount() {
+  //     return this.account;
+  //   },
+  //   theCategory() {
+  //     return this.category;
+  //   },
+  //   theTransaction() {
+  //     return this.transaction;
+  //   },
+  // },
+
+  // created() {
+  //   this.transactionId = this.$route.params.data.transaction;
+  // },
 };
 </script>

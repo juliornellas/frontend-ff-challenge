@@ -1,8 +1,25 @@
 <template>
   <div>
     <!-- Header filters -->
-    <div class="mb-4">
-      <p class="text-lg font-semibold">Transactions</p>
+    <div class="mb-4 flex justify-between">
+      <div>
+        <p class="text-lg font-semibold">Transactions</p>
+      </div>
+      <div class="flex items-end">
+        <p class="mr-2 text-gray-500 text-xs">Currency</p>
+        <button
+          @click="currencyOption('EUR')"
+          class="border rounded px-4 py-1 hover:border-green-500"
+        >
+          <font-awesome-icon icon="fa-solid fa-euro-sign" />
+        </button>
+        <button
+          @click="currencyOption('GBP')"
+          class="ml-2 border rounded px-4 py-1 hover:border-green-500"
+        >
+          <font-awesome-icon icon="fa-solid fa-sterling-sign" />
+        </button>
+      </div>
     </div>
 
     <!-- Filters -->
@@ -18,7 +35,11 @@
 
     <!-- Transactions -->
     <div class="mt-4 overflow-y-auto">
-      <TheTransactionTable :transactions="filtered" :categories="categories" />
+      <TheTransactionTable
+        :transactions="filtered"
+        :categories="categories"
+        @sort="sort"
+      />
     </div>
 
     <hr />
@@ -106,7 +127,10 @@ export default {
           skip: this.skip,
           take: this.take,
           accountId: this.accountId,
-          ordeyBy: this.orderBy,
+          currency: this.currency,
+          ordeyBy: {
+            date: this.orderBy,
+          },
         };
       },
     },
@@ -125,10 +149,11 @@ export default {
       filter: null,
       skip: 0,
       take: 10,
-      ordeyBy: { date: "asc" },
+      ordeyBy: "asc",
       accountId: "",
       accountsName: [],
       banksName: [],
+      currency: "",
     };
   },
 
@@ -136,7 +161,6 @@ export default {
     filtered() {
       return this.filteredTransactions;
     },
-
     accountsOptions() {
       console.log("ACCOUNTS options", this.accounts);
       const names = [];
@@ -146,7 +170,6 @@ export default {
       console.log("accounts options", names);
       return (this.accountsName = [...names]);
     },
-
     banksOptions() {
       console.log("BANKS options", this.accounts);
       const names = new Set();
@@ -156,7 +179,6 @@ export default {
       console.log("banks options", names);
       return (this.banksName = [...names]);
     },
-
     actualPage() {
       return (this.skip + this.take) / this.take;
     },
@@ -180,17 +202,24 @@ export default {
     searchEndingMonth(e) {
       console.log("Search for Ending month", e);
     },
-
     nextPage() {
       return (this.skip += this.take);
     },
-
     previousPage() {
       return this.skip >= 10 && (this.skip -= this.take);
     },
-
     goToPage(e) {
       return (this.skip = (e - 1) * this.take);
+    },
+    sort() {
+      console.log("SORT", this.ordeyBy === "asc");
+      return this.ordeyBy === "asc"
+        ? (this.ordeyBy = "desc")
+        : (this.ordeyBy = "asc");
+    },
+    currencyOption(e) {
+      console.log("CURRENCY OPTION", e);
+      return (this.currency = e);
     },
   },
 };

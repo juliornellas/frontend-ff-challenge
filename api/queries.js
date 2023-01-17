@@ -1,5 +1,8 @@
 import gql from "graphql-tag";
 
+/**
+ * To: transactions/index.vue
+ */
 export const ALL_ACCOUNTS = gql`
   query getAccounts {
     accounts {
@@ -40,6 +43,7 @@ export const FILTERED_TRANSACTIONS = gql`
     $accountId: String
     $skip: Int
     $take: Int
+    $currency: String
     $orderBy: TransactionsOrderByInput
   ) {
     filteredTransactions(
@@ -48,6 +52,7 @@ export const FILTERED_TRANSACTIONS = gql`
       skip: $skip
       take: $take
       orderBy: $orderBy
+      currency: $currency
     ) {
       id
       accountId
@@ -57,6 +62,42 @@ export const FILTERED_TRANSACTIONS = gql`
       currency
       date
       updatedAt
+    }
+  }
+`;
+
+/**
+ * To: transactions/details/index.vue
+ */
+export const TRANSACTION = gql`
+  query getTransaction($id: ID!) {
+    transaction(id: $id) {
+      id
+      reference
+      amount
+      currency
+      date
+      accountId
+      updatedAt
+      categoryId
+    }
+  }
+`;
+
+export const CATEGORY = gql`
+  query getCategory($id: ID!) {
+    category(id: $id) {
+      name
+      color
+    }
+  }
+`;
+
+export const ACCOUNT = gql`
+  query getAccount($id: ID!) {
+    account(id: $id) {
+      name
+      bank
     }
   }
 `;
