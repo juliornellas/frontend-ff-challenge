@@ -58,8 +58,6 @@
 </template>
 
 <script>
-// import { ref } from "vue";
-
 export default {
   emits: ["sort", "clean-sorted"],
   name: "TheTransactionTableHeader",
@@ -68,22 +66,17 @@ export default {
       type: Boolean,
       required: true,
     },
-    // isSortedDate: {
-    //   type: Boolean,
-    //   required: true,
-    // },
   },
   setup(_, { emit }) {
-    // let sortedAmount = ref(false);
     const cleanSorted = (e) => {
       if (e === "amount") {
         emit("clean-sorted", "amount");
-        // sortedAmount.value = false;
+      } else {
+        emit("clean-sorted", "date");
       }
     };
 
     return {
-      // sortedAmount,
       cleanSorted,
     };
   },

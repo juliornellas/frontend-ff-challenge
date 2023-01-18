@@ -32,10 +32,6 @@ export default {
       type: Boolean,
       required: true,
     },
-    // isSortedDate: {
-    //   type: Boolean,
-    //   required: true,
-    // },
   },
   components: {
     TransactionsList,

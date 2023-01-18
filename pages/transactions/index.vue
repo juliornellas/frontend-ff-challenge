@@ -123,7 +123,7 @@ export default {
           take: this.take,
           accountId: this.accountId,
           currency: this.currency,
-          ordeyBy: {
+          orderBy: {
             date: this.orderByDate,
             amount: this.orderByAmount,
           },
@@ -145,8 +145,7 @@ export default {
       filter: null,
       skip: 0,
       take: 10,
-      orderByDate: "desc",
-      orderByAmount: "",
+      orderBy: { date: "desc", amount: "" },
       accountId: "",
       accountsName: [],
       banksName: [],
@@ -157,20 +156,14 @@ export default {
 
   computed: {
     filtered() {
-      if (this.orderByAmount === "asc") {
-        console.log("Get into computed > filtered > amount > DESC");
-        const sorted = this.filteredTransactions.sort((a, b) => {
+      if (this.orderBy.amount === "asc") {
+        return this.filteredTransactions.sort((a, b) => {
           return +b.amount - +a.amount;
         });
-        console.log("Sorted", sorted);
-        return sorted;
-      } else if (this.orderByAmount === "desc") {
-        console.log("Get into computed > filtered > amount > DESC");
-        const sorted = this.filteredTransactions.sort((a, b) => {
+      } else if (this.orderBy.amount === "desc") {
+        return this.filteredTransactions.sort((a, b) => {
           return +a.amount - +b.amount;
         });
-        console.log("Sorted", sorted);
-        return sorted;
       } else {
         return this.filteredTransactions;
       }
@@ -233,27 +226,26 @@ export default {
     },
     sort(e) {
       if (e === "amount") {
-        console.log("Order By Amount");
         this.sortedAmount = true;
-        if (this.orderByAmount === "") {
-          return (this.orderByAmount = "asc");
-        } else if (this.orderByAmount === "asc") {
-          return (this.orderByAmount = "desc");
+        if (this.orderBy.amount === "") {
+          return (this.orderBy.amount = "asc");
+        } else if (this.orderBy.amount === "asc") {
+          return (this.orderBy.amount = "desc");
         } else {
-          return (this.orderByAmount = "asc");
+          return (this.orderBy.amount = "asc");
         }
       }
       if (e === "date") {
         console.log("Order By Date");
-        return this.orderByDate === "asc"
-          ? (this.orderByDate = "desc")
-          : (this.orderByDate = "asc");
+        return this.orderBy.date === "asc"
+          ? (this.orderBy.date = "desc")
+          : (this.orderBy.date = "asc");
       }
     },
     cleanSorted(e) {
       if (e === "amount") {
         this.sortedAmount = false;
-        this.orderByAmount = "";
+        this.orderBy.amount = "";
       }
     },
     currencyOption(e) {
