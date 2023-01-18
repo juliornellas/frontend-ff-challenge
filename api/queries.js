@@ -45,6 +45,8 @@ export const FILTERED_TRANSACTIONS = gql`
     $take: Int
     $currency: String
     $orderBy: TransactionsOrderByInput
+    $startingDate: String
+    $endingDate: String
   ) {
     filteredTransactions(
       filter: $filter
@@ -53,6 +55,8 @@ export const FILTERED_TRANSACTIONS = gql`
       take: $take
       currency: $currency
       orderBy: $orderBy
+      startingDate: $startingDate
+      endingDate: $endingDate
     ) {
       id
       accountId

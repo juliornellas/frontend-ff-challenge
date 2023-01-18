@@ -1,5 +1,5 @@
 <template>
-  <teleport to="body">
+  <Teleport to="body">
     <div @click="$emit('close-dialog')">
       <dialog open>
         <header>
@@ -11,13 +11,11 @@
           <slot></slot>
         </section>
         <menu>
-          <slot name="actions">
-            <Base-Button @click="$emit('close-dialog')">Cancel</Base-Button>
-          </slot>
+          <slot name="actions"> </slot>
         </menu>
       </dialog>
     </div>
-  </teleport>
+  </Teleport>
 </template>
 
 <script>
@@ -40,7 +38,7 @@ div {
   left: 0;
   height: 100vh;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(226, 247, 231, 0.75);
   z-index: 10;
 }
 
@@ -59,7 +57,7 @@ dialog {
 }
 
 header {
-  background-color: #3a0061;
+  background-color: #45960f;
   color: white;
   width: 100%;
   padding: 1rem;
