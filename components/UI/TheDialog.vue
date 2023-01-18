@@ -1,21 +1,19 @@
 <template>
-  <Teleport to="body">
-    <div @click="$emit('close-dialog')">
-      <dialog open>
-        <header>
-          <slot name="header">
-            <h2>{{ title }}</h2>
-          </slot>
-        </header>
-        <section>
-          <slot></slot>
-        </section>
-        <menu>
-          <slot name="actions"> </slot>
-        </menu>
-      </dialog>
-    </div>
-  </Teleport>
+  <div @click="$emit('close-dialog')">
+    <dialog open>
+      <header>
+        <slot name="header">
+          <h2>{{ title }}</h2>
+        </slot>
+      </header>
+      <section>
+        <slot></slot>
+      </section>
+      <menu>
+        <slot name="actions"> </slot>
+      </menu>
+    </dialog>
+  </div>
 </template>
 
 <script>
