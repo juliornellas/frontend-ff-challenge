@@ -51,8 +51,8 @@ export const FILTERED_TRANSACTIONS = gql`
       accountId: $accountId
       skip: $skip
       take: $take
-      orderBy: $orderBy
       currency: $currency
+      orderBy: $orderBy
     ) {
       id
       accountId

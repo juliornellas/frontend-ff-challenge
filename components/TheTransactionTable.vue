@@ -2,7 +2,11 @@
   <table class="w-full text-left border-collapse">
     <!-- Transaction header -->
     <!-- <TheTransactionTableHeader @sort="sortTransactions" /> -->
-    <TheTransactionTableHeader @sort="$emit('sort')" />
+    <TheTransactionTableHeader
+      @sort="sort"
+      @clean-sorted="$emit('clean-sorted', 'amount')"
+      :isSortedAmount="isSortedAmount"
+    />
     <!-- Transactions list -->
     <TransactionsList :transactions="transactions" :categories="categories" />
   </table>
@@ -14,6 +18,7 @@ import TheTransactionTableHeader from "./UI/TheTransactionTableHeader.vue";
 // import { computed, reactive, ref } from "vue";
 
 export default {
+  emits: ["sort", "clean-sorted"],
   props: {
     transactions: {
       type: Array,
@@ -23,10 +28,27 @@ export default {
       type: Array,
       required: true,
     },
+    isSortedAmount: {
+      type: Boolean,
+      required: true,
+    },
+    // isSortedDate: {
+    //   type: Boolean,
+    //   required: true,
+    // },
   },
   components: {
     TransactionsList,
     TheTransactionTableHeader,
+  },
+  setup(_, { emit }) {
+    const sort = (e) => {
+      emit("sort", e);
+    };
+
+    return {
+      sort,
+    };
   },
 };
 </script>
