@@ -69,11 +69,11 @@
             ></TheSelectOptionForSet>
           </div>
           <div v-else class="mt-2">
-            <TheInput
+            <input
               placeholder="Tap here and press ENTER to create a new category"
-              class="w-full border border rounded px-2 py-1 shadow-md"
+              class="w-full border rounded px-2 py-1 shadow-md transition ease-in-out focus:text-gray-700 focus:bg-white focus:border-green-500 focus:outline-none"
               v-model="newCategoryName"
-              @inputSearch="createCategory"
+              @keyup.enter="createCategory"
             />
             <div class="mt-2 flex align-center justify-start">
               <label for="pick-color">Choose the category color:</label>
@@ -218,9 +218,11 @@ export default {
       this.$apollo
         .mutate({
           mutation: CREATE_CATEGORY,
-          variables: {
-            name: this.newCategoryName,
-            color: this.newCategoryColor,
+          variables() {
+            return {
+              name: this.newCategoryName,
+              color: this.newCategoryColor,
+            };
           },
         })
         .then((data) => {
