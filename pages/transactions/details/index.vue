@@ -72,15 +72,12 @@
             <TheInput
               placeholder="Tap here and press ENTER to create a new category"
               class="w-full border border rounded px-2 py-1 shadow-md"
-              @inputSearch="inputCreate"
+              v-model="newCategoryName"
+              @inputSearch="createCategory"
             />
             <div class="mt-2 flex align-center justify-start">
               <label for="pick-color">Choose the category color:</label>
-              <input
-                class="ml-2"
-                type="color"
-                :value="category.color ? '#' + category.color : ''"
-              />
+              <input class="ml-2" type="color" v-model="newCategoryColor" />
             </div>
           </div>
         </div>
@@ -180,9 +177,9 @@ export default {
       newCategory = e.value;
     };
 
-    const inputCreate = (e) => {
-      console.log("Input for create category", e);
-    };
+    // const inputCreate = (e) => {
+    //   console.log("Input for create category", e);
+    // };
 
     const saveTransactionChanges = () => {
       showDialog.value = false;
@@ -205,101 +202,32 @@ export default {
       showDialog,
       showOrHide,
       selectedOption,
-      inputCreate,
+      // inputCreate,
       saveTransaction,
       saveTransactionChanges,
       cancelTransactionChanges,
     };
   },
 
-  // apollo: {
-  //   // updateCategory: {
-  //   //   mutation: UPDATE_CATEGORY,
-  //   //   variables() {
-  //   //     return {
-  //   //       id: this.categoryId,
-  //   //       name: this.categoryName,
-  //   //       color: this.categoryColor,
-  //   //     };
-  //   //   },
-  //   // },
-  //   transaction: {
-  //     query: TRANSACTION,
-  //     variable() {
-  //       return {
-  //         id: this.$route.params.data.transaction,
-  //       };
-  //     },
-  //     prefetch: true,
-  //   },
-  //   // category: {
-  //   //   query: CATEGORY,
-  //   //   variable() {
-  //   //     return {
-  //   //       id: this.accountId,
-  //   //     };
-  //   //   },
-  //   //   prefetch: true,
-  //   // },
-  //   // account: {
-  //   //   query: ACCOUNT,
-  //   //   variable() {
-  //   //     return {
-  //   //       id: this.accountId,
-  //   //     };
-  //   //   },
-  //   //   prefetch: true,
-  //   // },
-  // },
+  data() {
+    return { newCategoryName: "", newCategoryColor: "" };
+  },
 
-  // data() {
-  //   return {
-  //     transactionId: "",
-  //     show: false,
-  //     changedCategoryName: "",
-  //     newCategoryName: "",
-  //     newCategoryColor: "",
-  //     categories: [],
-  //   };
-  // },
-
-  // methods: {
-  //   showOrHide() {
-  //     this.show = !this.show;
-  //   },
-  //   selectedOption(e) {
-  //     this.changedCategoryName = e;
-  //   },
-  //   inputCreate(e) {
-  //     console.log("Input for create category", e);
-  //   },
-  //   createCategory() {
-  //     this.$apollo
-  //       .mutate({
-  //         mutation: CREATE_CATEGORY,
-  //         variables: {
-  //           name: this.newCategoryName,
-  //           color: this.newCategoryColor,
-  //         },
-  //       })
-  //       .then((data) => console.log("Category created", data));
-  //   },
-  // },
-
-  // computed: {
-  //   theAccount() {
-  //     return this.account;
-  //   },
-  //   theCategory() {
-  //     return this.category;
-  //   },
-  //   theTransaction() {
-  //     return this.transaction;
-  //   },
-  // },
-
-  // created() {
-  //   this.transactionId = this.$route.params.data.transaction;
-  // },
+  methods: {
+    createCategory() {
+      this.$apollo
+        .mutate({
+          mutation: CREATE_CATEGORY,
+          variables: {
+            name: this.newCategoryName,
+            color: this.newCategoryColor,
+          },
+        })
+        .then((data) => {
+          console.log("CREATED!", data);
+        })
+        .catch((error) => console.log("Error to create", error));
+    },
+  },
 };
 </script>

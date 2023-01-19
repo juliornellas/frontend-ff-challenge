@@ -8,6 +8,12 @@
       </li> -->
     </ul>
     <p>Category: {{ category }}</p>
+    <button
+      @click="createCategory"
+      class="my-4 p-4 border rounded hover:bg-gray-300"
+    >
+      Update category
+    </button>
   </div>
 </template>
 
@@ -47,7 +53,37 @@ export default {
   data() {
     return {
       categoryId: "6ad0e563-7f94-417d-8370-7eca2e52b2cc",
+      // name: "Advertising Updated",
+      // color: "7048a3",
+      name: "New category",
+      color: "ccc",
     };
+  },
+
+  methods: {
+    createCategory() {
+      this.$apollo
+        .mutate({
+          mutation: gql`
+            mutation CreateCategory($name: String, $color: String) {
+              createCategory(name: $name, color: $color) {
+                id
+                name
+                color
+              }
+            }
+          `,
+          variables: {
+            name: this.name,
+            color: this.color,
+          },
+        })
+        .then((data) => {
+          console.log("CREATED!");
+          console.log(data);
+        })
+        .catch((error) => console.log("Error to create", error));
+    },
   },
 };
 </script>
